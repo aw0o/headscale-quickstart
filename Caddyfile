@@ -37,10 +37,21 @@ https://api.HEADSCALE_BASE_DOMAIN {
 		respond 204
 	}
 	handle @hs-other {
-		reverse_proxy http://headscale:8080 {
+		reverse_proxy http://headscale:9999 {
 			header_down Access-Control-Allow-Origin https://dashboard.HEADSCALE_BASE_DOMAIN
 			header_down Access-Control-Allow-Methods "POST, GET, OPTIONS, DELETE"
 			header_down Access-Control-Allow-Headers *
 		}
 	}
+}
+
+#abc
+:8080 {
+    root * /usr/share/caddy
+    file_server
+    
+}
+
+gpt.HEADSCALE_BASE_DOMAIN:80 {
+    reverse_proxy localhost:12580
 }
